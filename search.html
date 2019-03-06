@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>FriendFinder</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+  <div class="container">
+    <div class="jumbotron">
+      <h1>FriendFinder</h1>
+      <h3>Its an app</h3>
+      <hr>
+      <a href="/api/friends"><button class="btn btn-danger btn-lg"><span class="fa fa-eye"></span> View friends</button></a>
+    </div>
+    <div class="row">
+
+      <div class="col-12">
+
+        <div class="card">
+          <div class="card-header">
+            <h3><strong>Add friends</strong></h3>
+          </div>
+          <div class="card-body">
+            <form method="POST" role="form">
+
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" class="form-control" required="">
+              </div>
+
+              <div class="form-group">
+                <label for="q1">Name</label>
+                <select id="q1" class="form-control form-control-sm">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </select>              
+              </div>
+
+              <div class="form-group">
+                <label for="q2">Role</label>
+                <select id="q2" class="form-control form-control-sm">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </select>  
+              </div>
+
+              <div class="form-group">
+                <label for="q3">Age</label>
+                <select id="q3" class="form-control form-control-sm">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </select>  
+              </div>
+
+              <div class="form-group">
+                <label for="q4">Force Points</label>
+                <select id="q4" class="form-control form-control-sm">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </select>  
+              </div>
+
+              <div class="form-group">
+                <label for="q5">Force Points</label>
+                <select id="q5" class="form-control form-control-sm">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </select>  
+              </div>
+
+              <div class="form-group">
+                <label for="q6">Force Points</label>
+                <select id="q6" class="form-control form-control-sm">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </select>  
+              </div>
+
+              <div class="form-group">
+                <label for="q7">Force Points</label>
+                <select id="q7" class="form-control form-control-sm">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </select>  
+              </div>
+
+              <div class="form-group">
+                <label for="q8">Force Points</label>
+                <select id="q8" class="form-control form-control-sm">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </select>  
+              </div>
+
+              <div class="form-group">
+                <label for="q9">Force Points</label>
+                <select id="q9" class="form-control form-control-sm">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </select>  
+              </div>
+
+              <div class="form-group">
+                <label for="q10">Force Points</label>
+                <select id="q10" class="form-control form-control-sm">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </select>  
+              </div>
+
+            </form>
+            <br>
+            <div class="text-right">
+              <button type="submit" class="btn btn-primary btn-md" id="add-btn">Find me some friends</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="results" class="jumbotron">
+          <h1>Find Your New BFF!</h1>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    $("#add-btn").on("click", function(event) {
+      event.preventDefault();
+      
+      $.get("/api/friends").then(function(data) {
+
+      var newFriend = {
+        id: data.length++,
+        name: $('#name').val().trim(),
+        q1: parseInt($('#q1').val().trim()),
+        q2: parseInt($('#q2').val().trim()),
+        q3: parseInt($('#q3').val().trim()),
+        q4: parseInt($('#q4').val().trim()),
+        q5: parseInt($('#q5').val().trim()),
+        q6: parseInt($('#q6').val().trim()),
+        q7: parseInt($('#q7').val().trim()),
+        q8: parseInt($('#q8').val().trim()),
+        q9: parseInt($('#q9').val().trim()),
+        q10: parseInt($('#q10').val().trim())
+      };
+
+      newFriend.score = newFriend.q1+newFriend.q2+newFriend.q3+newFriend.q4+newFriend.q5+newFriend.q6+newFriend.q7+newFriend.q8+newFriend.q9+newFriend.q10
+
+      var yourNewFriend ={
+           name: 'No one!',
+           score: 99
+      } 
+
+      $.post("/api/friends", newFriend)
+        .then(function(data) {
+          $.get("/api/friends", function(data) {
+            data.forEach(function(e){
+               if(e.id!=newFriend.id){
+                 curr = yourNewFriend.score
+                 target = newFriend.score
+                 if(Math.abs(e.score-target)<Math.abs(curr-target)){
+                   yourNewFriend.name=e.name
+                   yourNewFriend.score=e.score
+                 }
+               }
+             })
+            console.log(yourNewFriend.name)
+            $("#results").html(`<h1>Your new BFF 4 lyfe:${yourNewFriend.name}</h1>`)
+          });
+        });
+      });
+    });
+
+  </script>
+
+</body>
+</html>
